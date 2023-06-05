@@ -1,0 +1,24 @@
+﻿@{
+	ViewData["Title"] = "Subjects";
+}
+
+@model IEnumerable<Subject>
+<head>
+	<link rel="stylesheet" href="~/css/Subjects_Index_Styles.css" />
+</head>
+
+<body>
+	<h3>List of subjects:</h3>
+	@foreach (var subject in Model) {
+		<div class="border border-1 border-dark p-2 ">
+			<h5>@subject.Name </h5>
+			<h6>Id: @subject.Id</h6>
+			<a class="btn btn-warning" asp-action="Edit" asp-route-id="@subject.Id">Edit</a> 	@*buttony jsou odkazy(anchor) barva zluta*@
+			<a class="btn btn-danger" asp-action="Delete" asp-route-id="@subject.Id">Delete</a>			@*barva cervena*@
+		</div>
+	}
+	<hr />
+	<div>
+		<a class="btn btn-success" asp-action="Create">Add a new subject</a>
+	</div>
+</body>

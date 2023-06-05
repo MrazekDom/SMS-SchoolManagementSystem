@@ -1,0 +1,24 @@
+﻿@{
+	ViewData["Title"] = "Students";
+}
+@model IEnumerable<Student>
+<head>
+	<link rel="stylesheet" href="~/css/Students_Index_Styles.css" />
+</head>
+
+<body>
+	<h3>List of students:</h3>
+	@foreach (var student in Model){
+		<div class="border border-1 border-dark p-2 ">
+			<h5>@student.FirstName @student.LastName</h5>
+			Id: @student.Id
+			<p>Date of Birth: "@student.DateOfBirth.ToShortDateString()"</p>
+			<a class="btn btn-warning" asp-action="Edit" asp-route-id="@student.Id">Edit</a> 	@*buttony jsou odkazy(anchor) barva zluta*@
+			<a class="btn btn-danger" asp-action="Delete"asp-route-id="@student.Id">Delete</a>			@*barva cervena*@
+		</div>
+	}
+	<hr/>
+	<div>
+		<a class="btn btn-success" asp-action="Create">Create a new student</a>
+	</div>
+</body>
