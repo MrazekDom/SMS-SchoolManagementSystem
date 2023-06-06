@@ -11,8 +11,8 @@ namespace MagistriMVC.Controllers {
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index() {         //odsud volam asynchronni metodu ze SubjectsService
-			var allStudents = await service.GetSubjectsAsync();
-			return View(allStudents);
+			var allSubjects = await service.GetSubjectsAsync();
+			return View(allSubjects);
 		}
 
 		[HttpGet]
@@ -21,9 +21,15 @@ namespace MagistriMVC.Controllers {
 		}
 
 		[HttpPost]      //vkladam data
-		public async Task<IActionResult> Create(Subject newStudent) {       //predmet napsany ve formulari
-			await service.CreateAsync(newStudent);      //zavolam metodu pro vytvoreni predmetu
-			return RedirectToAction("Index");           //zavolani akce/metody Index
+		public async Task<IActionResult> Create(Subject newSubject) {       //predmet napsany ve formulari
+			if (ModelState.IsValid) {
+                await service.CreateAsync(newSubject);      //zavolam metodu pro vytvoreni predmetu
+                return RedirectToAction("Index");           //zavolani akce/metody Index
+            }
+			else {
+				return View();			//validace s prazdnym view
+			}
+			
 		}
 
 		[HttpGet]

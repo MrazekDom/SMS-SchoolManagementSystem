@@ -2,15 +2,22 @@
 <div>
     <h4>Add a subject</h4>
     <form asp-action="Create">
-        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>      @*Zobrazeni chyby pri validaci, cerveny text nad*@
         <div class="form-group">
             <label asp-for="Name"></label>
             <input type="text" asp-for="Name" class="form-control" />
-            @*<span asp-validation-for="FirstName" class="text-danger"></span>*@
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
             <input class="btn btn-success" type="submit" value="Create" />
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />        //client-side validace (uspora dat na mobilu), policko s varovanim zmizi hned po napsani 1 znaku
+    }
+}
+
 
