@@ -12,7 +12,7 @@ namespace MagistriMVC.Controllers {
         }
 
         public IActionResult Index() {
-            return View();
+            return View(userManager.Users);
         }
         [HttpGet]
         public IActionResult Create() {
