@@ -8,8 +8,9 @@ namespace MagistriMVC.Controllers {
         private UserManager<AppUser> userManager;       //built in servicka
         private IPasswordHasher<AppUser> passwordHasher;        //pro zahasovani a overeni hesla v databazi
 
-        public UsersController(UserManager<AppUser> userManager) {
+        public UsersController(UserManager<AppUser> userManager,IPasswordHasher<AppUser> passwordHasher) {
             this.userManager = userManager;
+            this.passwordHasher = passwordHasher;
         }
 
         public IActionResult Index() {
@@ -77,6 +78,20 @@ namespace MagistriMVC.Controllers {
                 ModelState.AddModelError("", error.Description);
         }
 
+        public async Task<IActionResult> Delete(string id) {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user != null) {
+                IdentityResult result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+                else
+                    Errors(result);
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View("Index", userManager.Users);
+        }
 
     }
+
 }
