@@ -1,0 +1,32 @@
+﻿@using SchoolManagementSystem.ViewModels;
+@model GradesVM
+<div>
+    <h4>Add a new grade</h4>
+    <form asp-action="Create">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group">
+            <label asp-for="StudentId" label class="control-label"></label>
+            <select asp-for="StudentId" select class="form-control" asp-items="ViewBag.Students"></select>
+            @*<span asp-validation-for="FirstName" class="text-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label asp-for="SubjectId" class="control-label"></label>
+            <select asp-for="SubjectId" select class="form-control" asp-items="ViewBag.Subjects"></select>
+            @*<span asp-validation-for="FirstName" class="text-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label asp-for="What"></label>
+            <input type="text" asp-for="What" class="form-control" />
+            @*<span asp-validation-for="LastName" class="text-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label asp-for="Mark"></label>
+            <input type="number" asp-for="Mark" class="form-control" />            @*jenom date bez casu*@
+            @*<span asp-validation-for="DateOfBirth" class="text-danger"></span>*@
+        </div>
+        <div>
+            <input class="btn btn-success" type="submit" value="Create" />
+        </div>
+    </form>
+</div>
+
