@@ -10,7 +10,7 @@ namespace SchoolManagementSystem.Controllers {
         }
 
         public IActionResult Index() { 
-            return View();
+            return View(roleManager.Roles);
         }
 
         private void Errors(IdentityResult result) {
