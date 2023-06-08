@@ -1,9 +1,11 @@
 ﻿using MagistriMVC.Models;
 using MagistriMVC.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagistriMVC.Controllers {
-	public class SubjectsController : Controller {
+    [Authorize]
+    public class SubjectsController : Controller {
 		public SubjectsService service { get; set; }
 		public SubjectsController(SubjectsService service) { 
 			this.service = service;

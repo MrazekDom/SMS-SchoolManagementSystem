@@ -1,10 +1,12 @@
 ﻿using MagistriMVC.Models;
 using MagistriMVC.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using System.Runtime.CompilerServices;
 
 namespace MagistriMVC.Controllers {
+    [Authorize]
     public class StudentsController : Controller {
         public StudentsService service;
         public StudentsController(StudentsService service)      //davam controlleru "service" jako parametr

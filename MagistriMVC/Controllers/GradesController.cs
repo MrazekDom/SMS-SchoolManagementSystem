@@ -1,10 +1,12 @@
 ﻿using MagistriMVC.Models;
 using MagistriMVC.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MagistriMVC.Controllers {
-	public class GradesController : Controller {
+    [Authorize]
+    public class GradesController : Controller {
 		public GradesService service { get; set; }
 
 		public GradesController(GradesService service) {

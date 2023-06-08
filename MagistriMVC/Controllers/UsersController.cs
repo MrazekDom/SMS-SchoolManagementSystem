@@ -1,9 +1,11 @@
 ﻿using MagistriMVC.Models;
 using MagistriMVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MagistriMVC.Controllers {
+    [Authorize]
     public class UsersController : Controller {
         private UserManager<AppUser> userManager;       //built in servicka
         private IPasswordHasher<AppUser> passwordHasher;        //pro zahasovani a overeni hesla v databazi

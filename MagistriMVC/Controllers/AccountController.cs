@@ -14,7 +14,8 @@ namespace MagistriMVC.Controllers {
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        [AllowAnonymous]
+        [HttpGet]
+        [AllowAnonymous]            //dovoli prihlasovani
         public IActionResult Login(string returnUrl) {
             LoginVM loginVM = new LoginVM();
             loginVM.returnUrl = returnUrl;
@@ -23,7 +24,7 @@ namespace MagistriMVC.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]          //dovoli prihlasovani
         public async Task<IActionResult> Login(LoginVM login) {
             if (ModelState.IsValid) {
                 AppUser appUser = await _userManager.FindByNameAsync(login.UserName);
