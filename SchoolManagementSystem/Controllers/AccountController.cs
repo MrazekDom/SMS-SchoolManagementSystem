@@ -31,7 +31,7 @@ namespace SchoolManagementSystem.Controllers {
                 if (appUser != null) {
                     await _signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser,
-                    login.Password, login.Remember, false);     //persistent cookie
+                    login.Password, login.Remember, false);
                     if (result.Succeeded) {
                         return Redirect(login.returnUrl ?? "/");
                     }
