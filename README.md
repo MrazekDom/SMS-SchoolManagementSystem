@@ -1,1 +1,1 @@
-# MagistriMVC
+# SMS-SchoolManagementSystem
