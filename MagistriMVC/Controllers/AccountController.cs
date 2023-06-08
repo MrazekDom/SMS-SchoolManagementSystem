@@ -36,7 +36,7 @@ namespace MagistriMVC.Controllers {
                         return Redirect(login.returnUrl ?? "/");
                     }
                 }
-                ModelState.AddModelError(nameof(login.UserName), "Login Failed: Invalid UserName or password");
+                ModelState.AddModelError(nameof(login.UserName), "Login Failed: Invalid User Name or Password");
             }
             return View(login);
         }

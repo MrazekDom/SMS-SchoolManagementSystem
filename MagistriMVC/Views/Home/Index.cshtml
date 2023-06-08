@@ -2,12 +2,10 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h1 class="bg-info text-white">@Model</h1>
+<div class="text-center">
+    <h1 class="bg-info text-white">@Model!</h1>      @*jako model predavam message ve forme stringu, message se zobrazi nahore*@
+    </div>
 <div class="text-center">
     <h1 class="display-4">This is a Student-Administration WebPage</h1>
     <img src="~/images/kimberly-farmer-lUaaKCUANVI-unsplash.jpg" alt="a stack of school books" style="width:500px;height:600px"/>
 </div>
-@if (User?.Identity?.IsAuthenticated ?? false)
-{
-<a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
-}

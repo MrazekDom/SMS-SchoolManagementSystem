@@ -15,7 +15,7 @@ namespace MagistriMVC.Controllers {
         [Authorize]     //cokoliv, co je pod timto, tak se neprihlaseny k tomu nedostane
         public async Task<IActionResult> Index() {
             AppUser loggedInUser = await userManager.GetUserAsync(HttpContext.User);
-            string message = "Hello! " + loggedInUser.UserName;
+            string message = "Welcome, " + loggedInUser.UserName;
             return View("Index", message);
         }
 

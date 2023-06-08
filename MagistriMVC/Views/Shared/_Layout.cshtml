@@ -22,9 +22,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>  
                         </li>
@@ -37,6 +34,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                         </li>
+                        @if (User?.Identity?.IsAuthenticated ?? false) {
+                            @*do budoucna udelat jinak nez pres margin*@
+                            <li class="nav-item" style="margin-left:auto">
+                                <a class="btn btn-danger"  asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                           
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -50,7 +55,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - MagistriMVC  @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+            &copy; 2023 - SMS - School-Management-System  @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
