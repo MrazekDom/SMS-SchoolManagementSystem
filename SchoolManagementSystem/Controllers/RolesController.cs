@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SchoolManagementSystem.Controllers {
+    [Authorize]
     public class RolesController : Controller {
         private RoleManager<IdentityRole> roleManager;
 
