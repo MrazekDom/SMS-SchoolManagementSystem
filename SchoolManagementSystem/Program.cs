@@ -13,6 +13,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {        //napoje
 builder.Services.AddIdentity<AppUser,
 IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options => {        //jak dlouho vydrzi prihlaseni aktivni
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    options.SlidingExpiration = true;  //reset cookie(doba vydrze prihlaseni) pri akci uzivatele na webu
+});
+
+builder.Services.ConfigureApplicationCookie(opts => opts.AccessDeniedPath = "/Account/AccessDenied");
+
 builder.Services.AddScoped<StudentsService>();      //pridavam service pro praci s daty z databaze
 builder.Services.AddScoped<SubjectsService>();
 builder.Services.AddScoped<GradesService>();
@@ -36,6 +44,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");     //NEmenim na defaultni login view, pro pripad, kdy by uzivatel zustal prihlasen z minule
 
 app.Run();

@@ -5,7 +5,7 @@ using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewModels;
 
 namespace SchoolManagementSystem.Controllers {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller {
         private UserManager<AppUser> userManager;       //built in servicka
         private IPasswordHasher<AppUser> passwordHasher;        //pro zahasovani a overeni hesla v databazi

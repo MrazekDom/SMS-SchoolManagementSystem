@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "READ USER";
 }
-<h1>All Users</h1>
+<h3>All Users:</h3>
 @*tlačítko pro vytvoření nového uživatele*@
-<a asp-action="Create" class="btn btn-secondary">Create a User</a>
+<a asp-action="Create" class="btn btn-success">Create a User</a>
 @*tabulka bude mít vyznačené okraje*@
 <table class="table table-sm table-bordered">
     @*definice prvního řádku tabulky s nadpisy sloupců (budou tučně)*@
@@ -17,8 +17,8 @@
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    @*rozdělení vlastností uživatele do jednotlivých buněk tabulky - držíme se schématu z table headeru - id, name,
-    email, tlačítka pro update a delete*@
+    @*rozdělení vlastností uživatele do jednotlivých buněk tabulky , schema table headeru - id, name,
+    email*@
     @foreach (AppUser user in Model) {
         <tr>
             <td>@user.Id</td> @*<td> = table data*@
