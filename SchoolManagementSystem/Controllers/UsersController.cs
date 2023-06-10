@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewModels;
 
@@ -9,17 +11,32 @@ namespace SchoolManagementSystem.Controllers {
     public class UsersController : Controller {
         private UserManager<AppUser> userManager;       //built in servicka
         private IPasswordHasher<AppUser> passwordHasher;        //pro zahasovani a overeni hesla v databazi
+        //private IPasswordValidator<AppUser> passwordValidator;
+        ApplicationDbContext dbContext;
 
-        public UsersController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher) {
+        public UsersController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher, ApplicationDbContext dbContext) {
             this.userManager = userManager;
             this.passwordHasher = passwordHasher;
+            this.dbContext = dbContext;
         }
 
         public IActionResult Index() {
             return View(userManager.Users);
         }
+
+        public async Task<StudentsDropDownViewModel> GetStudentsDropdownsValues() {     //tohle by nejspie melo byt ve vlastni servicsce
+            var studentsDropdownData = new StudentsDropDownViewModel() {
+                Students = await dbContext.Students.ToListAsync(),
+           
+            };
+            return studentsDropdownData;
+        }
+
+
         [HttpGet]
-        public IActionResult Create() {
+        public async Task<IActionResult> Create() {
+            var studentsDropdownData = await GetStudentsDropdownsValues();
+            ViewBag.Students = new SelectList(studentsDropdownData.Students, "Id", "LastName");
             return View();
         }
 
@@ -28,12 +45,20 @@ namespace SchoolManagementSystem.Controllers {
             if (ModelState.IsValid) {
                 AppUser appUser = new AppUser {
                     UserName = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
                 };
                 //pokus o zápis nového uživatele do databáze
-                IdentityResult result = await userManager.CreateAsync(appUser, user.Password);
-                if (result.Succeeded)
+                IdentityResult result = await userManager.CreateAsync(appUser, user.Password);              
+                if (result.Succeeded) { 
+                    foreach (int Id in user.AssignedStudentId) {     //pro kazde Id v poli prirazenych studentu
+                        var student = dbContext.Students.FirstOrDefault(st => st.Id == Id);       //najdi studenta v databazi podle Id
+                        appUser.AssignedStudents.Add(student);      //prirad ho do kolekce assignedStudents u AppUsera
+                        //await dbContext.SaveChangesAsync();
+                        
+                    }
+                    await userManager.UpdateAsync(appUser);
                     return RedirectToAction("Index");
+                }
                 else {
                     foreach (IdentityError error in result.Errors)
                         ModelState.AddModelError("", error.Description);

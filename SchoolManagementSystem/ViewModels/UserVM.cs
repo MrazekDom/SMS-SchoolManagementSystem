@@ -12,6 +12,6 @@ namespace SchoolManagementSystem.ViewModels {
         [Required]
         public string Password { get; set; }
 
-        public int AssignedStudentId { get; set; } //nove
+        public int[]? AssignedStudentId { get; set; } //pole pro IDcka prirazenych studentu k danemu uctu
     }
 }
