@@ -19,7 +19,7 @@ builder.Services.ConfigureApplicationCookie(options => {        //jak dlouho vyd
     options.SlidingExpiration = true;  //reset cookie(doba vydrze prihlaseni) pri akci uzivatele na webu
 });
 
-builder.Services.ConfigureApplicationCookie(opts => opts.AccessDeniedPath = "/Views/Account/AccessDenied");
+builder.Services.ConfigureApplicationCookie(opts => opts.AccessDeniedPath = "/Account/AccessDenied");
 
 builder.Services.AddScoped<StudentsService>();      //pridavam service pro praci s daty z databaze
 builder.Services.AddScoped<SubjectsService>();

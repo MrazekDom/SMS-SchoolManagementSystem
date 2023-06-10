@@ -2,9 +2,18 @@
 	ViewData["Title"] = "Students";
 }
 @model IEnumerable<Student>
-<head>
+@*<head>
 	<link rel="stylesheet" href="~/css/Students_Index_Styles.css" />
-</head>
+</head>*@
+<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Upload">
+	<div class="form-group">
+		<input type="file" name="file" />
+		@* Pokud se parametr jmenuje file, musi i name inputu byt file*@
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Upload" />
+	</div>
+</form>
 
 <body>
 	<h3>List of students:</h3>

@@ -5,7 +5,7 @@ using SchoolManagementSystem.Models;
 using SchoolManagementSystem.Services;
 
 namespace SchoolManagementSystem.Controllers {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class SubjectsController : Controller {
         public SubjectsService service { get; set; }
         public SubjectsController(SubjectsService service) {
