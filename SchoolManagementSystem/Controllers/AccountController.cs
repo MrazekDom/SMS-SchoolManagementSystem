@@ -15,11 +15,11 @@ namespace SchoolManagementSystem.Controllers {
             _signInManager = signInManager;
         }
         [HttpGet]
-        [AllowAnonymous]            //dovoli prihlasovani
-        public IActionResult Login(string returnUrl) {
+        [AllowAnonymous]            //uzivatel je presmerovan sem,dovoli prihlasovani
+        public IActionResult Login(string returnUrl) {      //z home controlleru ktery ma anotaci Authorize jsem poslan sem, parametr predavam returnUrl, ktery mam stored
             LoginVM loginVM = new LoginVM();
             loginVM.returnUrl = returnUrl;
-            return View(loginVM);
+            return View(loginVM);   //zobrazi View pro prihlaseni 
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace SchoolManagementSystem.Controllers {
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser,
                     login.Password, login.Remember, false);
                     if (result.Succeeded) {
-                        return Redirect(login.returnUrl ?? "/");
+                        return Redirect(login.returnUrl ?? "/");    //jestlize se prihlaseni povede, tak me to redirectne na returnUrl, ktery je "index" akce od HomeControlleru
                     }
                 }
                 ModelState.AddModelError(nameof(login.UserName), "Login Failed: Invalid User Name or Password");
@@ -42,7 +42,7 @@ namespace SchoolManagementSystem.Controllers {
         }
         public async Task<IActionResult> LogOut() {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");   //redirect na "index" akci od "HomeControlleru", uz jsem ale odhlasen, takze to uzivatele zpatky vyhodi na "login" akci co je tady
         }
 
 

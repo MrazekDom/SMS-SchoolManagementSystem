@@ -7,7 +7,7 @@
 <h1>Please, log-in.</h1>
 <div class="text-danger" asp-validation-summary="All"></div>        @*errory pri spatnem zadani jemna, hesla...nahore, cervene*@
 <form asp-action="Login" method="post">
-    <input type="hidden" asp-for="returnUrl" />
+    <input type="hidden" asp-for="returnUrl" />         @*schovany returnUrl, nejde videt*@
     <div class="form-group">
         <label asp-for="UserName"></label>
         <input asp-for="UserName" class="form-control" />

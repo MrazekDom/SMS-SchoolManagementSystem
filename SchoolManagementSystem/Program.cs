@@ -36,6 +36,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");     //NEmenim na defaultni login view, pro pripad, kdy by uzivatel zustal prihlasen z minule
 
 app.Run();
