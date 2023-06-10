@@ -19,24 +19,33 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                        </li>*@
+                         @if (User.Identity.IsAuthenticated && User.IsInRole("Teacher")||User.IsInRole("Admin")) {   @*uvidi teacher i admin*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>  
                         </li>
+                        }
+                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Subjects" asp-action="Index">Subjects</a>
                         </li>
+                         }
+                           @if (User.Identity.IsAuthenticated) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Grades" asp-action="Index">Grades</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                        </li>
+                           }
+
+                          @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) {         @*uvidi jen admin*@
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                         </li>
+                        }
                         @if (User?.Identity?.IsAuthenticated ?? false) {
                             @*do budoucna udelat jinak nez pres margin*@
                             <li class="nav-item" style="margin-left:auto">

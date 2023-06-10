@@ -45,6 +45,11 @@ namespace SchoolManagementSystem.Controllers {
             return RedirectToAction("Index", "Home");   //redirect na "index" akci od "HomeControlleru", uz jsem ale odhlasen, takze to uzivatele zpatky vyhodi na "login" akci co je tady
         }
 
+        public IActionResult AccessDenied() {
+            return View();
+        }
+
+
 
 
     }

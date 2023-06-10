@@ -5,7 +5,7 @@ using SchoolManagementSystem.Models;
 using SchoolManagementSystem.Services;
 
 namespace SchoolManagementSystem.Controllers {
-    [Authorize]
+    [Authorize(Roles ="Admin,Teacher")]
     public class StudentsController : Controller {
         public StudentsService service;
         public StudentsController(StudentsService service)      //davam controlleru "service" jako parametr
