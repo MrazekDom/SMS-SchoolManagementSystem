@@ -16,6 +16,7 @@
         <th>Email</th>
         <th>Update</th>
         <th>Delete</th>
+        <th>Connect Students</th>
     </tr>
     @*rozdělení vlastností uživatele do jednotlivých buněk tabulky , schema table headeru - id, name,
     email*@
@@ -33,6 +34,11 @@
                         Delete
                     </button>
                 </form>
+            </td>
+            <td>
+                <div class="form-group">
+                    <a class="btn btn-sm btn-primary" asp-action="ConnectStudents" asp-route-id="@user.Id">Connect Students</a>
+                </div>
             </td>
         </tr>
     }

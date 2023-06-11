@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewModels;
+using System.Data;
 
 namespace SchoolManagementSystem.Controllers {
     [Authorize(Roles = "Admin")]
@@ -48,15 +49,15 @@ namespace SchoolManagementSystem.Controllers {
                     Email = user.Email,
                 };
                 //pokus o zápis nového uživatele do databáze
-                IdentityResult result = await userManager.CreateAsync(appUser, user.Password);              
-                if (result.Succeeded) { 
+                IdentityResult result = await userManager.CreateAsync(appUser, user.Password);
+                if (result.Succeeded) {
                     foreach (int Id in user.AssignedStudentId) {     //pro kazde Id v poli prirazenych studentu
                         var student = dbContext.Students.FirstOrDefault(st => st.Id == Id);       //najdi studenta v databazi podle Id
-                        appUser.AssignedStudents.Add(student);      //prirad ho do kolekce assignedStudents u AppUsera
-                        //await dbContext.SaveChangesAsync();
-                        
+                        dbContext.AppUserStudents.Add(new AppUserStudent { AppUserId = appUser.Id, StudentId = student.Id });      //prirad ho do kolekce assignedStudents u AppUsera
+                                                                                                                                   //await dbContext.SaveChangesAsync();
+
                     }
-                    await userManager.UpdateAsync(appUser);
+                    await dbContext.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
                 else {
@@ -100,7 +101,31 @@ namespace SchoolManagementSystem.Controllers {
             return View(user);
         }
 
-        private void Errors(IdentityResult result) {
+        [HttpGet]
+        public async Task<IActionResult> ConnectStudents(string id) {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user == null) {
+                return View("NotFound");
+            }
+            int[] assignedStudents = await dbContext.AppUserStudents
+            .Where(a => a.AppUserId == user.Id)
+            .Select(a => a.StudentId)
+            .ToArrayAsync();
+            List<Student> StudentsList = await dbContext.AppUserStudents
+            .Where(a => a.AppUserId == user.Id)
+            .Select(a => a.Student)
+            .ToListAsync();
+
+            var studentsDropdownData = await GetStudentsDropdownsValues();
+            ViewBag.Students = new SelectList(studentsDropdownData.Students, "Id", "LastName");
+            UserVM vm = new UserVM();
+            vm.AssignedStudentId = assignedStudents;
+            vm.AssignedStudentsList = StudentsList;
+            
+            return View(vm);
+        }
+
+            private void Errors(IdentityResult result) {
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }

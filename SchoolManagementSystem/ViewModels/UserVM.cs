@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolManagementSystem.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.ViewModels {
     public class UserVM {
@@ -13,5 +14,7 @@ namespace SchoolManagementSystem.ViewModels {
         public string Password { get; set; }
 
         public int[]? AssignedStudentId { get; set; } //pole pro IDcka prirazenych studentu k danemu uctu
+
+        public List<Student>? AssignedStudentsList { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using SchoolManagementSystem.Models;
 namespace SchoolManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230610185944_ConnectUsersToStudents")]
-    partial class ConnectUsersToStudents
+    [Migration("20230611112008_ManyToManyStudentsUsers")]
+    partial class ManyToManyStudentsUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace SchoolManagementSystem.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AppUserStudent", b =>
-                {
-                    b.Property<int>("AssignedStudentsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AssignedUsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AssignedStudentsId", "AssignedUsersId");
-
-                    b.HasIndex("AssignedUsersId");
-
-                    b.ToTable("AppUserStudent");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -238,6 +223,21 @@ namespace SchoolManagementSystem.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SchoolManagementSystem.Models.AppUserStudent", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("AppUserStudents");
+                });
+
             modelBuilder.Entity("SchoolManagementSystem.Models.Grade", b =>
                 {
                     b.Property<int>("Id")
@@ -312,21 +312,6 @@ namespace SchoolManagementSystem.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("AppUserStudent", b =>
-                {
-                    b.HasOne("SchoolManagementSystem.Models.Student", null)
-                        .WithMany()
-                        .HasForeignKey("AssignedStudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchoolManagementSystem.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("AssignedUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -378,6 +363,25 @@ namespace SchoolManagementSystem.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SchoolManagementSystem.Models.AppUserStudent", b =>
+                {
+                    b.HasOne("SchoolManagementSystem.Models.AppUser", "AppUser")
+                        .WithMany("AppUserStudents")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SchoolManagementSystem.Models.Student", "Student")
+                        .WithMany("AppUserStudents")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("SchoolManagementSystem.Models.Grade", b =>
                 {
                     b.HasOne("SchoolManagementSystem.Models.Student", "Student")
@@ -395,6 +399,16 @@ namespace SchoolManagementSystem.Migrations
                     b.Navigation("Student");
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("SchoolManagementSystem.Models.AppUser", b =>
+                {
+                    b.Navigation("AppUserStudents");
+                });
+
+            modelBuilder.Entity("SchoolManagementSystem.Models.Student", b =>
+                {
+                    b.Navigation("AppUserStudents");
                 });
 #pragma warning restore 612, 618
         }

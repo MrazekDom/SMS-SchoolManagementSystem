@@ -9,7 +9,8 @@ namespace SchoolManagementSystem.Models {
         public string LastName { get; set; }
         [Display(Name = "Date of birth")]    //anotace pro zobrazeni v UI
         public DateTime DateOfBirth { get; set; }
-        public List<AppUser>? AssignedUsers { get; set; }  //nove
-    }
 
+        public ICollection<AppUserStudent> AppUserStudents { get; set; }
+        //public List<AppUser>? AssignedUsers { get; set; }  //nove
+    }
 }
