@@ -13,8 +13,16 @@ namespace SchoolManagementSystem.ViewModels {
         [Required]
         public string Password { get; set; }
 
+        [Display(Name ="Assign a student to a user:")]
         public int[]? AssignedStudentId { get; set; } //pole pro IDcka prirazenych studentu k danemu uctu
+        //musim to tu nechat, protoze prirazuju uzivateli Studenty na zakldae jejich unikatniho Id, ne jmena (vice studentu se muze jmenovat stejne)
+        //vyuzito v "Create" view
 
-        public List<Student>? AssignedStudentsList { get; set; }
+        [Display(Name ="List of students already assigned to this user:")]
+        public List<Student>? AssignedStudentsList { get; set; }    //vyuzito v "ConnectStudents" view
+
+        ///
+        public string? UserIdToView { get; set; }
+
     }
 }

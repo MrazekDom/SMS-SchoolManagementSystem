@@ -17,17 +17,27 @@
 
 <body>
 	<h3>List of students:</h3>
-	@foreach (var student in Model){
-		<div class="border border-1 border-dark p-2 ">
-			<h5>@student.FirstName @student.LastName</h5>
-			Id: @student.Id
-			<p>Date of Birth: "@student.DateOfBirth.ToShortDateString()"</p>
-			<a class="btn btn-warning" asp-action="Edit" asp-route-id="@student.Id">Edit</a> 	@*buttony jsou odkazy(anchor) barva zluta*@
-			<a class="btn btn-danger" asp-action="Delete"asp-route-id="@student.Id">Delete</a>			@*barva cervena*@
-		</div>
-	}
-	<hr/>
+	<hr />
 	<div>
-		<a class="btn btn-success" asp-action="Create">Create a new student</a>
+		<a class="btn btn-success" asp-action="Create" style="margin-bottom:15px;">Create a new student</a>
 	</div>
+	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content">
+		<th>Name</th>
+		<th>Last Name</th>
+		<th>Id</th>
+		<th>Date of Birth</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	@foreach (var student in Model){
+		<tr>
+			<td>@student.FirstName</td>
+			<td>@student.LastName</td>
+			<td>@student.Id</td>
+			<td>@student.DateOfBirth.ToShortDateString()</td>
+			<td><a class="btn btn-warning" asp-action="Edit" asp-route-id="@student.Id">Edit</a></td>
+			<td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@student.Id">Delete</a></td>
+		</tr>
+	}
+	</table>
+
 </body>
