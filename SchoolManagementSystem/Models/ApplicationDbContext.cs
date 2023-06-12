@@ -30,7 +30,12 @@ namespace SchoolManagementSystem.Models {
                 .HasOne(aus => aus.Student)
                 .WithMany(s => s.AppUserStudents)
                 .HasForeignKey(aus => aus.StudentId);
-        }
+
+			modelBuilder.Entity<Grade>()
+		        .HasOne(g => g.Student)
+		        .WithMany(s => s.Grades)
+		        .HasForeignKey(g => g.StudentId);
+		}
 
     }
 }

@@ -49,10 +49,10 @@ namespace SchoolManagementSystem.Services {
 			.Where(a => a.AppUserId == user.Id)
 			.Select(a => a.Student.Id)
 			.ToListAsync();
-			List<Grade> grades = await DbContext.Grades
+			List<Grade> grades = await DbContext.Grades     //vytvorim kolekci znamek, kde Includnu i jejich Properties (Student + Subject)
 	        .Include(g => g.Student)
 	        .Include(g => g.Subject)
-	        .Where(g => StudentsIds.Contains(g.Student.Id))
+	        .Where(g => StudentsIds.Contains(g.Student.Id))     //vlozim ty znamky, kde se shoduji Id v z listu StudentsIds s Id studentu v tabulce Grades
 	        .ToListAsync();
 			return grades;
             
