@@ -1,28 +1,31 @@
 ﻿@model IEnumerable<Grade>
 <body>
 	<h3>List of all grades:</h3>
+	<hr />
+	<div>
+		<a class="btn btn-success" asp-controller="Grades" asp-action="Create" style="margin-bottom:15px;">Add new grade</a>
+	</div>
 	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content">
-		<th>Name</th>
-		<th>Subject</th>
-		<th>Topic</th>
-		<th>Date of change</th>
+		<th>Name:</th>
+		<th>Last Name:</th>
+		<th>Subject:</th>
+		<th>Topic:</th>
+		<th>Date of change:</th>
 		<th>Mark:</th>
 		<th>Edit</th>
 		<th>Delete</th>
 	@foreach (var grade in Model) {
 		<tr>
+			<td>@grade.Student.FirstName</td>
 			<td>@grade.Student.LastName</td>
-			<td>Subject: @grade.Subject.Name </td>
-			<td>Topic: @grade.What</td>
-			<td>Date of change: @grade.Date.ToShortDateString()</td>	
-			<td>Mark: @grade.Mark</td>	
+			<td>@grade.Subject.Name </td>
+			<td>@grade.What</td>
+			<td>@grade.Date.ToShortDateString()</td>	
+			<td>@grade.Mark</td>	
 			<td><a class="btn btn-warning" asp-controller="Grades" asp-action="Edit" asp-route-id="@grade.Id">Edit</a></td>	 	@*buttony jsou odkazy(anchor) barva zluta*@
 			<td><a class="btn btn-danger" asp-controller="Grades" asp-action="Delete" asp-route-id="@grade.Id">Delete</a></td>			@*barva cervena*@
 		</tr>
 	}
 	</table>
-	<hr />
-	<div>
-		<a class="btn btn-success" asp-controller="Grades" asp-action="Create">Add new grade</a>
-	</div>
+	
 </body>

@@ -1,22 +1,37 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SchoolManagementSystem.Models;
 using SchoolManagementSystem.Services;
 using SchoolManagementSystem.ViewModels;
+using System.Security.Claims;
 
 namespace SchoolManagementSystem.Controllers {
     [Authorize]
     public class GradesController : Controller {
         public GradesService service { get; set; }
+       private UserManager<AppUser> _userManager;
+		public GradesController(GradesService service, UserManager<AppUser> userManager) {
+			this.service = service;
+            _userManager = userManager;
+		}
 
-        public GradesController(GradesService service) {
-            this.service = service;
-        }
+		public async Task<IActionResult> Index() {
+			var currentUser = await _userManager.GetUserAsync(User);        //najdu si prave prihlaseneho Usera
+			if (User.IsInRole("Admin")||(User.IsInRole("Teacher"))) {       //jestli je User "admin" nebo "teacher", tak to zobrazi vsechny
+				var allGrades = await service.GetAllAsync();
+				return View(allGrades);     //odkazuju na view a predavam mu data (allGrades)
+			}
+            else {
+                var userId = currentUser.Id;                        //kdy neni Teacher nebo Admin, tak si stahnu Idcko Usera a poslu ho do servicky
+                var selectedGrades = await service.GetSomeAsync(userId);
+                return View(selectedGrades);
 
-        public async Task<IActionResult> Index() {
-            var allGrades = await service.GetAllAsync();
-            return View(allGrades);     //odkazuju na view a predavam mu data (allGrades)
+			}
+            
+            
         }
 
         public async Task<IActionResult> Create() {             //zobrazeni View s nazvem "Create" (UI)

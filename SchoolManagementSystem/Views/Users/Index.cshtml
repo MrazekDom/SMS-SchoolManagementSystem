@@ -6,7 +6,7 @@
 @*tlačítko pro vytvoření nového uživatele*@
 <a asp-action="Create" class="btn btn-success">Create a User</a>
 @*tabulka bude mít vyznačené okraje*@
-<table class="table table-sm table-bordered">
+<table class="table table-sm table-bordered" style="border:solid black 4px;width:max-content">
     @*definice prvního řádku tabulky s nadpisy sloupců (budou tučně)*@
     @*<tr> = table row*@
     <tr>
@@ -37,7 +37,7 @@
             </td>
             <td>
                 <div class="form-group">
-                    <a class="btn btn-sm btn-primary" asp-action="ConnectStudents" asp-route-id="@user.Id">Connect Students</a>
+                    <a class="btn btn-sm btn-primary" asp-action="ConnectStudents" asp-route-id="@user.Id">Edit connected students</a>
                 </div>
             </td>
         </tr>

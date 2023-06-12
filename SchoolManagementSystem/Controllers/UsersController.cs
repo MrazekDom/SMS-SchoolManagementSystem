@@ -52,10 +52,13 @@ namespace SchoolManagementSystem.Controllers {
                 //pokus o zápis nového uživatele do databáze
                 IdentityResult result = await userManager.CreateAsync(appUser, userVM.Password);
                 if (result.Succeeded) {
-                    foreach (int Id in userVM.AssignedStudentId) {     //pro kazde Id v poli prirazenych studentu
-                        var student = dbContext.Students.FirstOrDefault(st => st.Id == Id);       //najdi studenta v databazi podle Id
-                        dbContext.AppUserStudents.Add(new AppUserStudent { AppUserId = appUser.Id, StudentId = student.Id });      //prirad ho do many-to-many tabulky AppUserStudent u AppUsera                                                                                                                                  
-                    }
+                    if (userVM.AssignedStudentId != null) {
+						foreach (int Id in userVM.AssignedStudentId) {     //pro kazde Id v poli prirazenych studentu
+							var student = dbContext.Students.FirstOrDefault(st => st.Id == Id);       //najdi studenta v databazi podle Id
+							dbContext.AppUserStudents.Add(new AppUserStudent { AppUserId = appUser.Id, StudentId = student.Id });      //prirad ho do many-to-many tabulky AppUserStudent u AppUsera                                                                                                                                  
+						}
+					}
+                   
                     await dbContext.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
