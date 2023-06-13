@@ -1,11 +1,11 @@
 ﻿@model RoleEdit
-<h3 style="background:#FFB703;border-radius:30%;">Role Edit</h3>
+<h3 style="background:#E5E7EB;">Role Edit</h3>
 <div asp-validation-summary="All" class="text-danger"></div>        @*zobrazeni erroru z validace modelu*@
 <form method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleId" value="@Model.Role.Id" />
-    <h4 style="background:#FFB703;border-radius:30%;">Add To:<span style="font-style:italic;">@Model.Role.Name</span> </h4>
-    <table class="table table-bordered table-sm" style="border:solid black 4px;background:#FFA343;width:max-content;margin-left:auto;margin-right:auto;">
+    <h4 style="background:#E5E7EB;">Add To:<span style="font-style:italic;">@Model.Role.Name</span> </h4>
+    <table class="table table-bordered table-sm" style="border:solid black 4px;background:#E5E7EB;width:max-content;margin-left:auto;margin-right:auto;">
         @if (Model.NonMembers.Count() == 0) {
             <tr><td colspan="2">All Users Are Members</td></tr>
         }
@@ -20,8 +20,8 @@
             }
         }
     </table>
-    <h4 style="background:#FFB703;border-radius:30%;">Remove From:<span style="font-style:italic;"> @Model.Role.Name</span></h4>
-    <table class="table table-bordered table-sm" style="border:solid black 4px;background:#FFA343;width:max-content;margin-left:auto;margin-right:auto;">
+    <h4 style="background:#E5E7EB;">Remove From:<span style="font-style:italic;"> @Model.Role.Name</span></h4>
+    <table class="table table-bordered table-sm" style="border:solid black 4px;background:#E5E7EB;width:max-content;margin-left:auto;margin-right:auto;">
         @if (Model.Members.Count() == 0) {
             <tr><td colspan="2">No Users Are Members</td></tr>
         }

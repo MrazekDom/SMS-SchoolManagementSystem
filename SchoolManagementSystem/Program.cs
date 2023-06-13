@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => {        //napojeni na databazi
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDbConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SMSdb"));
 });
 builder.Services.AddIdentity<AppUser,
 IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();

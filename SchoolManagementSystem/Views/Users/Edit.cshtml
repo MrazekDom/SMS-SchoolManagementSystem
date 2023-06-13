@@ -2,10 +2,10 @@
 @{
     ViewData["Title"] = "UPDATE USER";
 }
-<h3 style="background:#FFB703;border-radius:30%;">User Edit</h3>
+<h3 style="background:#D3D3D3;">User Edit</h3>
 <div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="Edit" method="post">
-    <div class="form-group">
+<form asp-action="Edit" method="post" class="form">
+    <div class="form-group" >
         <label asp-for="Id"></label>
         <input asp-for="Id" class="form-control" disabled />
     </div>
