@@ -7,6 +7,7 @@
 </head>*@
 <body>
 	<h3>List of students:</h3>
+	<hr />
 <div class="container" style="display:flex;gap:15px;padding:0;">
 		<hr/>
 		<div>
@@ -26,12 +27,14 @@
 
 
 	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content;margin-top:15px;">
-		<th>Name</th>
-		<th>Last Name</th>
-		<th>Id</th>
-		<th>Date of Birth</th>
-		<th>Edit</th>
-		<th>Delete</th>
+		<tr>
+			<th>Name</th>
+			<th>Last Name</th>
+			<th>Id</th>
+			<th>Date of Birth</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
 	@foreach (var student in Model){
 		<tr>
 			<td>@student.FirstName</td>

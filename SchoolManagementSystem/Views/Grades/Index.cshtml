@@ -6,14 +6,16 @@
 		<a class="btn btn-success" asp-controller="Grades" asp-action="Create" style="margin-bottom:15px;">Add new grade</a>
 	</div>
 	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content">
-		<th>Name:</th>
-		<th>Last Name:</th>
-		<th>Subject:</th>
-		<th>Topic:</th>
-		<th>Date of change:</th>
-		<th>Mark:</th>
-		<th>Edit</th>
-		<th>Delete</th>
+		<tr>
+			<th>Name:</th>
+			<th>Last Name:</th>
+			<th>Subject:</th>
+			<th>Topic:</th>
+			<th>Date of change:</th>
+			<th>Mark:</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
 	@foreach (var grade in Model) {
 		<tr>
 			<td>@grade.Student.FirstName</td>
