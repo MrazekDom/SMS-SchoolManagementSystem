@@ -5,8 +5,8 @@
     ViewData["Title"] = "Create User";
 }
 
-<h1>Create User</h1>
-<a asp-action="Index" class="btn btn-secondary">Back</a>        @*navra na Index users*@
+<h3 style ="background:#FFB703;border-radius:30%;">Create a User</h3>
+
 <div asp-validation-summary="All" class="text-danger"></div>
 <form method="post">
     <div class="form-group">
@@ -25,5 +25,9 @@
         <label asp-for="AssignedStudentId" class="control-label"></label>
         <select multiple asp-for="AssignedStudentId" class="form-control" asp-items="ViewBag.Students"></select>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>        @*navra na Index users*@
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+    
 </form>

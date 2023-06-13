@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model IEnumerable<IdentityRole>
-<h3>Roles:</h3>
+<h3 style="background:#FFB703;border-radius:30%;">Roles:</h3>
 <hr />
 <a asp-action="Create" class="btn btn-success" style="margin-bottom:15px;">Create a Role</a>
-<table class="table table-sm table-bordered table-bordered" style="border:solid black 4px;width:max-content">
+<table class="table table-sm table-bordered table-bordered" style="border:solid black 4px;background:#FFA343;width:max-content;margin-left:auto;margin-right:auto;">
     <tr>
         <th>Name</th>
         <th>Update</th>
@@ -13,10 +13,10 @@
     @foreach (var role in Model) {
         <tr>
             <td>@role.Name</td>
-            <td><a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@role.Id">Update</a></td>
+            <td><a class="btn btn-warning" asp-action="Edit" asp-route-id="@role.Id" style="border:solid 1px white;">Edit</a></td>         @*dva ruzne zpusoby vytvoreni tlacitka*@
             <td>
                 <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
+                    <button type="submit" class="btn btn-danger" style="border:solid 1px white;">
                         Delete
                     </button>
                 </form>

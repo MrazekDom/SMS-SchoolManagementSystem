@@ -2,7 +2,7 @@
 @model GradesVM
 
 <div>
-    <h4>Edit a grade</h4>
+    <h3 style="background:#FFB703;border-radius:30%;">Edit a grade</h3>
     <form asp-action="Edit">
         @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
         <div class="form-group">
@@ -26,6 +26,7 @@
             @*<span asp-validation-for="DateOfBirth" class="text-danger"></span>*@
         </div>
         <div>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
             <input class="btn btn-success" type="submit" value="Save changes" />
         </div>
     </form>

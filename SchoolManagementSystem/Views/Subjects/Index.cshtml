@@ -8,12 +8,12 @@
 </head>
 
 <body>
-	<h3>List of subjects:</h3>
+	<h3 style="background:#FFB703;border-radius:30%;">List of subjects:</h3>
 	<hr />
 	<div>
 		<a class="btn btn-success" asp-action="Create" style="margin-bottom:15px;">Add a new subject</a>
 	</div>
-	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content;margin-top:15px;">
+	<table class="table table-bordered table-sm" style="border:solid black 4px;background:#FFA343;width:max-content;margin-top:15px;margin-left:auto;margin-right:auto;">
 		<tr>
 			<th>Name </th>
 			<th>Id</th>
@@ -24,8 +24,8 @@
 		<tr>
 				<td>@subject.Name </td>
 				<td> @subject.Id</td>
-				<td><a class="btn btn-warning" asp-action="Edit" asp-route-id="@subject.Id">Edit</a> </td>	@*buttony jsou odkazy(anchor) barva zluta*@
-				<td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@subject.Id">Delete</a>	</td>		@*barva cervena*@
+				<td><a class="btn btn-warning" asp-action="Edit" asp-route-id="@subject.Id" style="border:solid 1px white;">Edit</a> </td>	@*buttony jsou odkazy(anchor) barva zluta*@
+				<td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@subject.Id" style="border:solid 1px white;">Delete</a>	</td>		@*barva cervena*@
 		</tr>
 			
 	}

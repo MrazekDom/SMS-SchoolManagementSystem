@@ -2,8 +2,7 @@
 @{
     ViewData["Title"] = "UPDATE USER";
 }
-<h1>Update User</h1>
-<a asp-action="Index" class="btn btn-secondary">Back</a>
+<h3 style="background:#FFB703;border-radius:30%;">User Edit</h3>
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Edit" method="post">
     <div class="form-group">
@@ -26,5 +25,9 @@
         <label asp-for="AssignedStudentId" class="control-label"></label>
         <select multiple asp-for="AssignedStudentId" class="form-control" asp-items="ViewBag.Students"></select>
     </div>*@
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    
 </form>

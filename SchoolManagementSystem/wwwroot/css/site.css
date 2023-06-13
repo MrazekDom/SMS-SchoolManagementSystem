@@ -8,13 +8,76 @@ html {
   }
 }
 
+
 html {
   position: relative;
   min-height: 100%;
 }
 
+
+/*#7289da*/
+
+
 body {
-  margin-bottom: 60px;
-  background-color:beige;       /*zmena css*/
+    margin-bottom: 20px;
+    background-color: #8ECAE6; /*zmena css*/
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+*{
+    margin:5px;
+    box-sizing:border-box;
+    border-radius:3%;
+
+}
+
+header {
+    background-color: #219EBC;
+    padding: 2em 0 2em 0;
+}
+
+.left {
+    background-color: #023047;
+    padding: 3em 0 3em 0;
+    flex: 1 1 100px;
+}
+
+main { /* element main*/
+    background-color: #219EBC;
+    padding: 3em 1em 3em 1em;
+    flex: 1 1 450px;
+}
+
+.main { /*class main*/
+    display: flex;
+    flex: 1;
+   
+}
+
+
+.right {
+    background-color: #023047;
+    padding: 3em 0 3em 0;
+    flex: 1 1 100px;
+}
+
+footer {
+    background-color: #219EBC;
+    padding: 1em 0 1em 0;
+    border-radius: 10%;
+}
+
+@media all and (max-width:550px){
+    .main{
+        flex-direction:column;
+    }
+
+    main{
+        padding:5em 0 5em 0;
+    }
 }
 

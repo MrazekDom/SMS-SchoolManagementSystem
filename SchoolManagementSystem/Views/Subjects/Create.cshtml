@@ -1,6 +1,6 @@
 ﻿@model Subject
 <div>
-    <h4>Add a subject</h4>
+    <h3 style="background:#FFB703;border-radius:30%;">Add a subject</h3>
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>      @*Zobrazeni chyby pri validaci, cerveny text nad*@
         <div class="form-group">
@@ -9,6 +9,7 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
             <input class="btn btn-success" type="submit" value="Create" />
         </div>
     </form>
