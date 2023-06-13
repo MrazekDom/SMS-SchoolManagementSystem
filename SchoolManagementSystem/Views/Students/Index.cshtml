@@ -5,29 +5,46 @@
 @*<head>
 	<link rel="stylesheet" href="~/css/Students_Index_Styles.css" />
 </head>*@
-<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Upload">
-	<div class="form-group">
-		<input type="file" name="file" />
-		@* Pokud se parametr jmenuje file, musi i name inputu byt file*@
-	</div>
-	<div class="form-group">
-		<input type="submit" value="Upload" />
-	</div>
-</form>
-
 <body>
 	<h3>List of students:</h3>
-	@foreach (var student in Model){
-		<div class="border border-1 border-dark p-2 ">
-			<h5>@student.FirstName @student.LastName</h5>
-			Id: @student.Id
-			<p>Date of Birth: "@student.DateOfBirth.ToShortDateString()"</p>
-			<a class="btn btn-warning" asp-action="Edit" asp-route-id="@student.Id">Edit</a> 	@*buttony jsou odkazy(anchor) barva zluta*@
-			<a class="btn btn-danger" asp-action="Delete"asp-route-id="@student.Id">Delete</a>			@*barva cervena*@
+	<hr />
+<div class="container" style="display:flex;gap:15px;padding:0;">
+		<hr/>
+		<div>
+			<a class="btn btn-success" asp-action="Create" style="margin-bottom:15px;">Create a new student</a>
 		</div>
+
+		<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Upload">
+			<div class="form-group" style="margin-bottom:15px;">
+				<input type="file" name="file" />
+				@* Pokud se parametr jmenuje file, musi i name inputu byt file*@
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Upload" />
+			</div>
+		</form>
+</div>
+
+
+	<table class="table table-bordered table-sm" style="border:solid black 4px;width:max-content;margin-top:15px;">
+		<tr>
+			<th>Name</th>
+			<th>Last Name</th>
+			<th>Id</th>
+			<th>Date of Birth</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	@foreach (var student in Model){
+		<tr>
+			<td>@student.FirstName</td>
+			<td>@student.LastName</td>
+			<td>@student.Id</td>
+			<td>@student.DateOfBirth.ToShortDateString()</td>
+			<td><a class="btn btn-warning" asp-action="Edit" asp-route-id="@student.Id">Edit</a></td>
+			<td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@student.Id">Delete</a></td>
+		</tr>
 	}
-	<hr/>
-	<div>
-		<a class="btn btn-success" asp-action="Create">Create a new student</a>
-	</div>
+	</table>
+
 </body>

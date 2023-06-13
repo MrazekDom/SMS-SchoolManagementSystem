@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewModels;
@@ -6,10 +7,12 @@ using SchoolManagementSystem.ViewModels;
 namespace SchoolManagementSystem.Services {
     public class GradesService {
         public ApplicationDbContext DbContext { get; set; }
-        public GradesService(ApplicationDbContext context) {
-            DbContext = context;
-        }
-        public async Task<GradesDropDownViewModel> GetNewGradesDropDownsValues() {      //metoda pro naplneni ViewModelu
+        private UserManager<AppUser> _userManager;
+		public GradesService(ApplicationDbContext context, UserManager<AppUser> userManager) {
+			DbContext = context;
+			_userManager = userManager;
+		}
+		public async Task<GradesDropDownViewModel> GetNewGradesDropDownsValues() {      //metoda pro naplneni ViewModelu
             var gradesDropdownsData = new GradesDropDownViewModel() {
                 Students = await DbContext.Students.OrderBy(n => n.LastName).ToListAsync(),
                 Subjects = await DbContext.Subjects.OrderBy(x => x.Name).ToListAsync(),
@@ -39,6 +42,21 @@ namespace SchoolManagementSystem.Services {
             return await DbContext.Grades.Include(n => n.Student).Include(c => c.Subject).FirstOrDefaultAsync(s => s.Id == id);
 
         }
+
+        public async Task<IEnumerable<Grade>> GetSomeAsync(string id) {
+			AppUser user = await _userManager.FindByIdAsync(id);    //najdu si usera podle Idcka
+			List<int> StudentsIds = await DbContext.AppUserStudents        //udelam si list Idcek jemu prirazenych studentu
+			.Where(a => a.AppUserId == user.Id)
+			.Select(a => a.Student.Id)
+			.ToListAsync();
+			List<Grade> grades = await DbContext.Grades     //vytvorim kolekci znamek, kde Includnu i jejich Properties (Student + Subject)
+	        .Include(g => g.Student)
+	        .Include(g => g.Subject)
+	        .Where(g => StudentsIds.Contains(g.Student.Id))     //vlozim ty znamky, kde se shoduji Id v z listu StudentsIds s Id studentu v tabulce Grades
+	        .ToListAsync();
+			return grades;
+            
+		}
 
         public async Task UpdateAsync(int id, GradesVM gradeToUpdate) {
             var dbGrade = await DbContext.Grades.FirstOrDefaultAsync(n => n.Id == gradeToUpdate.Id);
