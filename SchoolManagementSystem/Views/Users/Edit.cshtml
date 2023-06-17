@@ -17,9 +17,9 @@
         <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="form-group">                                @*AppUser:IdentityUser ma vlastnost "PasswordHash" kde je hasnute heslo, takze tam neni zapsane jako tenhle plain text*@
         <label for="password">Password</label>
-        <input name="password" class="form-control" />
+        <input type="password" input name="password" class="form-control" />
     </div>
     @*<div class="form-group">
         <label asp-for="AssignedStudentId" class="control-label"></label>
