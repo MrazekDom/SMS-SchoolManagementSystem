@@ -27,6 +27,7 @@ namespace SchoolManagementSystem.Controllers {
         public async Task<IActionResult> Create(Subject newSubject) {       //predmet napsany ve formulari
             if (ModelState.IsValid) {
                 await service.CreateAsync(newSubject);      //zavolam metodu pro vytvoreni predmetu
+                TempData["success"] = "Subject created successfully";
                 return RedirectToAction("Index");           //zavolani akce/metody Index
             }
             else {
@@ -47,6 +48,7 @@ namespace SchoolManagementSystem.Controllers {
         [HttpPost]      //vkladam data
         public async Task<IActionResult> Edit(int id, [Bind("Id, Name")] Subject subject) {
             await service.UpdateAsync(id, subject);
+            TempData["success"] = "Subject edited successfully";
             return RedirectToAction("Index");
         }
         //[HttpDelete]		slozitejsi problem, proc to nejde, vratit se...
@@ -56,6 +58,7 @@ namespace SchoolManagementSystem.Controllers {
                 return View("NotFound");
             }
             await service.DeleteAsync(id);
+            TempData["success"] = "Subject deleted successfully";
             return RedirectToAction("Index");
         }
     }

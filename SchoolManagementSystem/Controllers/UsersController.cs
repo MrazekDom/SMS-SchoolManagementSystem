@@ -60,6 +60,7 @@ namespace SchoolManagementSystem.Controllers {
 					}
                    
                     await dbContext.SaveChangesAsync();
+                    TempData["success"] = "User created successfully";
                     return RedirectToAction("Index");
                 }
                 else {
@@ -92,8 +93,10 @@ namespace SchoolManagementSystem.Controllers {
                     ModelState.AddModelError("", "Password cannot be empty");
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password)) {
                     IdentityResult result = await userManager.UpdateAsync(user);
-                    if (result.Succeeded)
+                    if (result.Succeeded) {
+                        TempData["success"] = "User edited successfully";
                         return RedirectToAction("Index");
+                    }
                     else
                         Errors(result);
                 }
@@ -139,6 +142,7 @@ namespace SchoolManagementSystem.Controllers {
                     dbContext.AppUserStudents.Add(new AppUserStudent { AppUserId = appUser.Id, StudentId = student.Id });      //prirad ho do many-to-many tabulky AppUserStudent u AppUsera                                                                                                                                  
                 }
                 await dbContext.SaveChangesAsync();
+                TempData["success"] = "Students connected to user successfully";
                 return RedirectToAction("Index");
             }
             else
@@ -154,6 +158,7 @@ namespace SchoolManagementSystem.Controllers {
             .FirstOrDefault();
             dbContext.AppUserStudents.Remove(studentToRemove);
             await dbContext.SaveChangesAsync();
+            TempData["success"] = "Students unassigned successfully";
             return RedirectToAction("ConnectStudents", new {id = userId});
         }
 
@@ -166,8 +171,10 @@ namespace SchoolManagementSystem.Controllers {
             AppUser user = await userManager.FindByIdAsync(id);
             if (user != null) {
                 IdentityResult result = await userManager.DeleteAsync(user);
-                if (result.Succeeded)
+                if (result.Succeeded) {
+                    TempData["success"] = "User deleted successfully";
                     return RedirectToAction("Index");
+                }
                 else
                     Errors(result);
             }

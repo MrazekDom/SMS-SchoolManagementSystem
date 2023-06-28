@@ -24,6 +24,7 @@ namespace SchoolManagementSystem.Controllers {
         [HttpPost]      //vkladam data
         public async Task<IActionResult> Create(Student newStudent) {       //student napsany ve formulari
             await service.CreateAsync(newStudent);      //zavolam metodu pro vytvoreni studenta
+            TempData["success"] = "Student created successfully";
             return RedirectToAction("Index");           //zavolani akce/metody Index
         }
 
@@ -39,16 +40,17 @@ namespace SchoolManagementSystem.Controllers {
         [HttpPost]      //vkladam data
         public async Task<IActionResult> Edit(int id, [Bind("Id, FirstName, LastName, DateOfBirth")] Student student) {
             await service.UpdateAsync(id, student);
+            TempData["success"] = "Student edited successfully";
             return RedirectToAction("Index");
         }
 
-        //[HttpDelete]         slozitejsi problem, proc nejde, vratit se k tomu pozdeji
         public async Task<IActionResult> Delete(int id) {
             var studenToDelete = await service.GetByIdAsync(id);
             if (studenToDelete == null) {
                 return View("NotFound");
             }
             await service.DeleteAsync(id);
+            TempData["success"] = "Student deleted successfully";
             return RedirectToAction("Index");
         }
 

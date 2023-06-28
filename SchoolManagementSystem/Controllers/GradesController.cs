@@ -49,6 +49,7 @@ namespace SchoolManagementSystem.Controllers {
                 return View(newGrade);      //zobrazi view (UI) kteremu v parametru predava objekt s nazvem newGrade
             }
             await service.CreateAsync(newGrade); //zapise do databaze pres servisku
+            TempData["success"] = "Grade created successfully";
             return RedirectToAction("Index"); //zobrazi view Index 
         }
 
@@ -77,12 +78,14 @@ namespace SchoolManagementSystem.Controllers {
         public async Task<IActionResult> Delete(int id) {
             var gradeToDelete = await service.GetByIdAsync(id);
             await service.DeleteAsync(id);
+            TempData["success"] = "Grade deleted successfully";
             return RedirectToAction("Index");
         }
 
         [HttpPost]      //vkladam data
         public async Task<IActionResult> Edit(int id, [Bind("Id, StudentId, SubjectId, What, Mark, Date")] GradesVM gradeToUpdate) {
             await service.UpdateAsync(id, gradeToUpdate);
+            TempData["success"] = "Grade edited successfully";
             return RedirectToAction("Index");
         }
 

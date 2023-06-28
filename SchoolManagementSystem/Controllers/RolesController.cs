@@ -27,8 +27,11 @@ namespace SchoolManagementSystem.Controllers {
         public async Task<IActionResult> Create([Required] string name) {
             if (ModelState.IsValid) {
                 IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
-                if (result.Succeeded)
+                if (result.Succeeded) {
+                    TempData["success"] = "Role created successfully";
                     return RedirectToAction("Index");
+
+                }
                 else
                     Errors(result);
             }
@@ -40,8 +43,10 @@ namespace SchoolManagementSystem.Controllers {
             IdentityRole role = await roleManager.FindByIdAsync(id);
             if (role != null) {
                 IdentityResult result = await roleManager.DeleteAsync(role);
-                if (result.Succeeded)
-                    return RedirectToAction("Index");
+                if (result.Succeeded) {
+                    TempData["success"] = "Role deleted successfully";
+                return RedirectToAction("Index");                    
+                }
                 else
                     Errors(result);
             }
@@ -88,8 +93,10 @@ namespace SchoolManagementSystem.Controllers {
                     }
                 }
             }
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) {
+                TempData["success"] = "Role edited successfully";
                 return RedirectToAction("Index");
+            }
             else
                 return await Edit(model.RoleId);
         }

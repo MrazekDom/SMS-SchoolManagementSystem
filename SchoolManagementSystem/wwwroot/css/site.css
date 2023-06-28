@@ -31,11 +31,6 @@ body {
 
 }
 
-header {
-    background-color: #F9FAF8;
-   
-}
-
 main { 
     display: flex;
     flex-direction:column;
