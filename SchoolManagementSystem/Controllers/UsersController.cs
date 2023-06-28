@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SchoolManagementSystem.Migrations;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.ViewModels;
+using SMS.Data;
+using SMS.Models.Models;
+using SMS.Models.ViewModels;
 using System.Data;
-using System.Runtime.CompilerServices;
+
 
 namespace SchoolManagementSystem.Controllers {
     [Authorize(Roles = "Admin")]

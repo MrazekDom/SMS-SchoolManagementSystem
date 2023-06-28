@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.Services;
-using SchoolManagementSystem.ViewModels;
-using System.Security.Claims;
+using SMS.Data.Services;
+using SMS.Models.Models;
+using SMS.Models.ViewModels;
 
 namespace SchoolManagementSystem.Controllers {
-    [Authorize]
+	[Authorize]
     public class GradesController : Controller {
         public GradesService service { get; set; }
        private UserManager<AppUser> _userManager;

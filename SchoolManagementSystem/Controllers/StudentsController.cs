@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.Services;
+using SMS.Data.Services;
+using SMS.Models.Models;
 
 namespace SchoolManagementSystem.Controllers {
     [Authorize(Roles ="Admin,Teacher")]

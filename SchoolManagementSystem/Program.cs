@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.Services;
+using SMS.Models.Models;
+using SMS.Data.Services;
+using SMS.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

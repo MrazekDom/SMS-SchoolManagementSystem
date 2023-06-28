@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.ViewModels;
+using SMS.Models.Models;
+using SMS.Models.ViewModels;
 
 namespace SchoolManagementSystem.Controllers {
     [Authorize]

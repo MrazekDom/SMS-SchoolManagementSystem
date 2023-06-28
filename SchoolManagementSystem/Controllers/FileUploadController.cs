@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolManagementSystem.Models;
-using SchoolManagementSystem.Services;
+using SMS.Data.Services;
+using SMS.Models.Models;
 using System.Globalization;
 using System.Xml;
 
